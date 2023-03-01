@@ -286,15 +286,11 @@ void remove_struct(cars arr[], int* size_car)
 		printf("Неверный тип данных!\n");
 	}
 
-	for (int i = delete-1; i < *size_car; i++)
-	{
-			for (int j = i; j < *size_car - 1; j++) 
+			for (int j = delete-1; j < *size_car - 1; j++) 
 			{
 				arr[j] = arr[j + 1];
 			}
 			(*size_car)--;
-			break;
-	}
 }
 
 
