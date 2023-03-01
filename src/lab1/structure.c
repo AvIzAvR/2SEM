@@ -11,7 +11,7 @@ void get_int(int* x)
 	while (!scanf_s("%d", x) || getchar() != '\n' || *x <= 0)
 	{
 		rewind(stdin);
-		printf("Неверный тип данных!\n");
+		printf("РќРµРІРµСЂРЅС‹Р№ С‚РёРї РґР°РЅРЅС‹С…!\n");
 	}
 }
 
@@ -43,7 +43,7 @@ void get_st(int* st)
 	while (!scanf_s("%d", st) || getchar() != '\n' || *st < 1 || *st > 2)
 	{
 		rewind(stdin);
-		printf("Неверный тип данных!\n");
+		printf("РќРµРІРµСЂРЅС‹Р№ С‚РёРї РґР°РЅРЅС‹С…!\n");
 	}
 }
 
@@ -56,7 +56,7 @@ void show_struct(cars arr[], int size)
 {
 	for (int i = 0; i < size; i++)
 	{
-		printf("Название авто: %s        Скорость: %d        Год выпуска: %d        ", arr[i].name, arr[i].speed, arr[i].year);
+		printf("РќР°Р·РІР°РЅРёРµ Р°РІС‚Рѕ: %s        РЎРєРѕСЂРѕСЃС‚СЊ: %d        Р“РѕРґ РІС‹РїСѓСЃРєР°: %d        ", arr[i].name, arr[i].speed, arr[i].year);
 		switch (arr[i].colors) {
 		case Red:
 			printf("Color: Red\n");
@@ -93,7 +93,7 @@ int get_car(cars arr[])
 {
 	int size_car = 0;
 	int size_z = 256;
-	printf("Введите название авто, чтобы выйти введите \'s\':");
+	printf("Р’РІРµРґРёС‚Рµ РЅР°Р·РІР°РЅРёРµ Р°РІС‚Рѕ, С‡С‚РѕР±С‹ РІС‹Р№С‚Рё РІРІРµРґРёС‚Рµ \'s\':");
 	char* z = (char*)calloc(size_z, sizeof(char));
 	int i = 0;
 	int check = 0;
@@ -103,9 +103,10 @@ int get_car(cars arr[])
 		letter = getchar();
 		if (letter != '\n')
 		{
-			if (i < 256)
+			if (i < size_z)
 			{
 				z[i] = letter;
+				printf("%c", letter);
 				i++;
 			}
 			else
@@ -121,39 +122,44 @@ int get_car(cars arr[])
 			z[i] = '\0';
 			if (z[0] == 's' && z[1] == '\0')
 			{
+				break;
+			}
+			else
+			{
+				arr[size_car].name = (char*)malloc((strlen(z) + 1) * sizeof(char));
+				strcpy_s(arr[size_car].name, 256, z);
+				printf("\nР’РІРµРґРёС‚Рµ РјР°РєСЃРёРјР°Р»СЊРЅСѓСЋ СЃРєРѕСЂРѕСЃС‚СЊ Р°РІС‚РѕРјРѕР±РёР»СЏ:");
+				get_int(&arr[size_car].speed);
+				printf("Р’РІРµРґРёС‚Рµ РіРѕРґ РІС‹РїСѓСЃРєР° Р°РІС‚РѕРјРѕР±РёР»СЏ:");
+				get_int(&arr[size_car].year);
+				printf("Р’РІРµРґРёС‚Рµ С†РІРµС‚ Р°РІС‚Рѕ РёР· РїСЂРµРґР»РѕР¶РµРЅРЅС‹С…:\n1 - Red\n2 - White\n3 - Р§РµСЂРЅС‹Р№\n4 - Р—РµР»С‘РЅС‹Р№");
+				int color;
+				get_int(&color);
+				switch (color) {
+				case 1:
+					arr[size_car].colors = Red;
 					break;
+				case 2:
+					arr[size_car].colors = White;
+					break;
+				case 3:
+					arr[size_car].colors = Black;
+					break;
+				case 4:
+					arr[size_car].colors = Green;
+					break;
+				default:
+					arr[size_car].colors = Red;
+					break;
+				}
+				size_car++;
+				printf("\nР’РІРµРґРёС‚Рµ РЅР°Р·РІР°РЅРёРµ Р°РІС‚Рѕ, С‡С‚РѕР±С‹ РІС‹Р№С‚Рё РІРІРµРґРёС‚Рµ \'s\':");
+				i = 0;
+				check++;
 			}
-			arr[size_car].name = z;
-			printf("Введите максимальную скорость автомобиля:");
-			get_int(&arr[size_car].speed);
-			printf("Введите год выпуска автомобиля:");
-			get_int(&arr[size_car].year);
-			printf("Введите цвет авто из предложенных:\n1 - Red\n2 - White\n3 - Черный\n4 - Зелёный");
-			int color;
-			get_int(&color);
-			switch (color) {
-			case 1:
-				arr[i].colors = Red;
-				break;
-			case 2:
-				arr[i].colors = White;
-				break;
-			case 3:
-				arr[i].colors = Black;
-				break;
-			case 4:
-				arr[i].colors = Green;
-				break;
-			default:
-				arr[i].colors = Red;
-				break;
-			}
-			size_car++;
-			printf("\nВведите название авто, чтобы выйти введите \'s\':");
-			i = 0;
-			check++;
 		}
 	}
+	free(z);
 	return size_car;
 }
 
@@ -268,16 +274,16 @@ void quick_sort_year_name(cars arr[], int low, int high)
 void remove_struct(cars arr[], int* size_car) 
 {
 	int delete;
-	printf("Выберите номер структуры, который хотите удалить:\n");
+	printf("Р’С‹Р±РµСЂРёС‚Рµ РЅРѕРјРµСЂ СЃС‚СЂСѓРєС‚СѓСЂС‹, РєРѕС‚РѕСЂС‹Р№ С…РѕС‚РёС‚Рµ СѓРґР°Р»РёС‚СЊ:\n");
 	for (int i = 0; i < *size_car; ++i) {
-		printf("[%d]: Название авто: %s        Скорость: %d        Год выпуска: %d\n", (i+1), arr[i].name, arr[i].speed, arr[i].year);
+		printf("[%d]: РќР°Р·РІР°РЅРёРµ Р°РІС‚Рѕ: %s        РЎРєРѕСЂРѕСЃС‚СЊ: %d        Р“РѕРґ РІС‹РїСѓСЃРєР°: %d\n", (i+1), arr[i].name, arr[i].speed, arr[i].year);
 	}
 	printf("\n");
 	rewind(stdin);
 	while (!scanf_s("%d", &delete) || getchar() != '\n' || delete < 1 || delete > size_car)
 	{
 		rewind(stdin);
-		printf("Неверный тип данных!\n");
+		printf("РќРµРІРµСЂРЅС‹Р№ С‚РёРї РґР°РЅРЅС‹С…!\n");
 	}
 
 	for (int i = delete-1; i < *size_car; i++)
@@ -297,7 +303,7 @@ int compare_cars_by_year_speed(const void* a, const void* b) {
 	cars* car1 = (cars*)a;
 	cars* car2 = (cars*)b;
 
-	// Сравниваем годы
+	// РЎСЂР°РІРЅРёРІР°РµРј РіРѕРґС‹
 	if (car1->year < car2->year) {
 		return -1;
 	}
@@ -305,7 +311,7 @@ int compare_cars_by_year_speed(const void* a, const void* b) {
 		return 1;
 	}
 	else {
-		// Если годы равны, сравниваем скорости
+		// Р•СЃР»Рё РіРѕРґС‹ СЂР°РІРЅС‹, СЃСЂР°РІРЅРёРІР°РµРј СЃРєРѕСЂРѕСЃС‚Рё
 		if (car1->speed < car2->speed) {
 			return -1;
 		}
@@ -321,9 +327,9 @@ int compare_cars_by_year_speed(const void* a, const void* b) {
 sort_cars(cars arr[], int size_car)
 {
 	int key;
-	printf("Выберите каким методом вы желаете отсортировать структуры\n1-По алфавиту(названия)\n2-По году\n3-По скорости\n4-По алфавиту(названия) и году\n");
-	while (!scanf_s("%d", &key) || key > 5 || key <= 0) {
-		printf("Неверно введённые данные\n");
+	printf("Р’С‹Р±РµСЂРёС‚Рµ РєР°РєРёРј РјРµС‚РѕРґРѕРј РІС‹ Р¶РµР»Р°РµС‚Рµ РѕС‚СЃРѕСЂС‚РёСЂРѕРІР°С‚СЊ СЃС‚СЂСѓРєС‚СѓСЂС‹\n1-РџРѕ Р°Р»С„Р°РІРёС‚Сѓ(РЅР°Р·РІР°РЅРёСЏ)\n2-РџРѕ РіРѕРґСѓ\n3-РџРѕ СЃРєРѕСЂРѕСЃС‚Рё\n4-РџРѕ Р°Р»С„Р°РІРёС‚Сѓ(РЅР°Р·РІР°РЅРёСЏ) Рё РіРѕРґСѓ\n");
+	while (!scanf_s("%d", &key) || key > 4 || key <= 0) {
+		printf("РќРµРІРµСЂРЅРѕ РІРІРµРґС‘РЅРЅС‹Рµ РґР°РЅРЅС‹Рµ\n");
 		rewind(stdin);
 	}
 	switch (key) {
@@ -349,9 +355,9 @@ void menu(cars arr[], int size_car)
 {
 	int key;
 	while (1) {
-		printf("Что вы хотите сделать?\n1) Показать структуры\n2) Отсортировать структуры\n3) Удалить структуру\n");
+		printf("Р§С‚Рѕ РІС‹ С…РѕС‚РёС‚Рµ СЃРґРµР»Р°С‚СЊ?\n1) РџРѕРєР°Р·Р°С‚СЊ СЃС‚СЂСѓРєС‚СѓСЂС‹\n2) РћС‚СЃРѕСЂС‚РёСЂРѕРІР°С‚СЊ СЃС‚СЂСѓРєС‚СѓСЂС‹\n3) РЈРґР°Р»РёС‚СЊ СЃС‚СЂСѓРєС‚СѓСЂСѓ\n");
 		while (!scanf_s("%d", &key) || key > 3 || key <= 0) {
-			printf("Неверно введённый тип данных\n");
+			printf("РќРµРІРµСЂРЅРѕ РІРІРµРґС‘РЅРЅС‹Р№ С‚РёРї РґР°РЅРЅС‹С…\n");
 			rewind(stdin);
 		}
 		switch (key) {
@@ -370,7 +376,7 @@ void menu(cars arr[], int size_car)
 			break;
 		}
 		default: {
-			printf("Неверно введённый тип данных\n");
+			printf("РќРµРІРµСЂРЅРѕ РІРІРµРґС‘РЅРЅС‹Р№ С‚РёРї РґР°РЅРЅС‹С…\n");
 			break;
 		}
 		}
