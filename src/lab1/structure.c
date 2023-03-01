@@ -288,6 +288,7 @@ void remove_struct(cars arr[], int* size_car)
 
 			for (int j = delete-1; j < *size_car - 1; j++) 
 			{
+				if(j != size_car - 2)
 				arr[j] = arr[j + 1];
 			}
 			(*size_car)--;
@@ -299,7 +300,6 @@ int compare_cars_by_year_speed(const void* a, const void* b) {
 	cars* car1 = (cars*)a;
 	cars* car2 = (cars*)b;
 
-	// Сравниваем годы
 	if (car1->year < car2->year) {
 		return -1;
 	}
@@ -307,7 +307,6 @@ int compare_cars_by_year_speed(const void* a, const void* b) {
 		return 1;
 	}
 	else {
-		// Если годы равны, сравниваем скорости
 		if (car1->speed < car2->speed) {
 			return -1;
 		}
