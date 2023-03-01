@@ -288,7 +288,7 @@ void remove_struct(cars arr[], int* size_car)
 
 			for (int j = delete-1; j < *size_car - 1; j++) 
 			{
-				if(j != size_car - 2)
+				if(j != size_car - 1)
 				arr[j] = arr[j + 1];
 			}
 			(*size_car)--;
