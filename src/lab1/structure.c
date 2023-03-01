@@ -126,7 +126,7 @@ int get_car(cars arr[])
 			}
 			else
 			{
-				arr[size_car].name = (char*)malloc((strlen(z) + 1) * sizeof(char));
+				arr[size_car].name = (char*)malloc((sizeof(z) + 1) * sizeof(char));
 				strcpy_s(arr[size_car].name, 256, z);
 				printf("\nВведите максимальную скорость автомобиля:");
 				get_int(&arr[size_car].speed);
