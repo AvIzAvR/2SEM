@@ -295,7 +295,7 @@ void remove_struct(cars arr[], int* size_car)
 
 
 
-sort_cars(cars arr[], int size_car)
+void sort_cars(cars arr[], int size_car)
 {
 	int key;
 	printf("Выберите каким методом вы желаете отсортировать структуры\n1-По алфавиту(названия)\n2-По году\n3-По скорости\n4-По алфавиту(названия) и году\n");
