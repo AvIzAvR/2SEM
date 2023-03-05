@@ -257,7 +257,7 @@ void remove_struct(cars arr[], int* size_car)
 	printf("Введите индекс структуры, которую нужно удалить:\n");
 	for (int i = 0; i < *size_car; ++i) 
 	{
-		printf("[%d]: Название авто: %s        Скорость: %d        Год выпуска: %d        Цвет: ", (i + 1), arr[i].name, arr[i].speed, arr[i].year);
+		printf("[%d]: Название авто: %s        Скорость: %d        Год выпуска: %d        Цвет: ", i, arr[i].name, arr[i].speed, arr[i].year);
 		switch (arr[i].colors) {
 		case Red:
 			printf("Красный\n");
@@ -277,15 +277,13 @@ void remove_struct(cars arr[], int* size_car)
 		}
 	}
 
-	while (!scanf_s("%d", &index_to_remove) || index_to_remove < 1 || index_to_remove > *size_car)
+	while (!scanf_s("%d", &index_to_remove) || index_to_remove < 0 || index_to_remove > *size_car)
 		{
 			rewind(stdin);
 			printf("Неверный тип данных!\n");
 		}
-
-	for (int i = index_to_remove - 1; i < *size_car - 1; i++) 
+	for (int i = index_to_remove; i < *size_car - 1; i++) 
 	{
-		if(i+1 <= *size_car - 1) 
 		{
 			arr[i] = arr[i + 1];
 		}
