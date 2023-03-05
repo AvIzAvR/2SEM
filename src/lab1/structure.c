@@ -15,27 +15,6 @@ void get_int(int* x)
 	}
 }
 
-char* get_string()
-{
-    int num = 256;
-    char* string = (char*)calloc(num, sizeof(char));
-    char ch;
-    int pos = 0;
-    while (1)
-    {
-        ch = getchar();
-        if (ch == '\n')
-        {
-            string[pos] = '\0';
-            string = (char*)realloc(string, (pos + 1) * sizeof(char));
-            return string;
-        }
-        string[pos] = ch;
-        pos++;
-        if (pos == 256)
-            string = (char*)realloc(string, (pos + 1) * sizeof(char));
-    }
-}
 
 void get_st(int* st)
 {
@@ -48,7 +27,7 @@ void get_st(int* st)
 
 cars* init_arr(int size)
 {
-	return (cars*)malloc(size * sizeof(cars));
+	return (cars*)calloc(size, sizeof(cars));
 }
 
 void show_struct(cars arr[], int size)
@@ -86,6 +65,28 @@ cars create_cars(int year, int speed, char* name, enum Colors color)
 	return a;
 }
 
+void get_color(cars arr[], int size_car)
+{
+	int color;
+	get_int(&color);
+	switch (color) {
+	case 1:
+		arr[size_car].colors = Red;
+		break;
+	case 2:
+		arr[size_car].colors = White;
+		break;
+	case 3:
+		arr[size_car].colors = Black;
+		break;
+	case 4:
+		arr[size_car].colors = Green;
+		break;
+	default:
+		printf("Неверно введённый тип данных");
+		break;
+	}
+}
 
 
 int get_car(cars arr[])
@@ -98,7 +99,7 @@ int get_car(cars arr[])
 	int check = 0;
 	while (1)
 	{
-		char letter;
+		int letter;
 		letter = getchar();
 		if (letter != '\n')
 		{
@@ -130,26 +131,8 @@ int get_car(cars arr[])
 				get_int(&arr[size_car].speed);
 				printf("Введите год выпуска автомобиля:");
 				get_int(&arr[size_car].year);
-				printf("Введите цвет авто из предложенных:\n1 - Red\n2 - White\n3 - Черный\n4 - Зелёный");
-				int color;
-				get_int(&color);
-				switch (color) {
-				case 1:
-					arr[size_car].colors = Red;
-					break;
-				case 2:
-					arr[size_car].colors = White;
-					break;
-				case 3:
-					arr[size_car].colors = Black;
-					break;
-				case 4:
-					arr[size_car].colors = Green;
-					break;
-				default:
-					arr[size_car].colors = Red;
-					break;
-				}
+				printf("Введите цвет авто из предложенных:\n1 - Red\n2 - White\n3 - Black\n4 - Green");
+				get_color(arr, size_car);
 				size_car++;
 				printf("\nВведите название авто, чтобы выйти введите \'s\':");
 				i = 0;
@@ -269,7 +252,8 @@ void quick_sort_year_name(cars arr[], int low, int high)
 
 
 
-void remove_struct(cars arr[], int* size_car) {
+void remove_struct(cars arr[], int* size_car) 
+{
 	int index_to_remove;
 	printf("Введите индекс структуры, которую нужно удалить:\n");
 	for (int i = 0; i < *size_car; ++i) {
@@ -277,7 +261,7 @@ void remove_struct(cars arr[], int* size_car) {
 	}
 	scanf_s("%d", &index_to_remove);
 	if (index_to_remove < 1 || index_to_remove > *size_car) {
-		printf("Ошибка: неверный индекс структуры для удаления.\n");
+		printf("Неверно введённый тип данных\n");
 		return;
 	}
 
@@ -293,29 +277,6 @@ void remove_struct(cars arr[], int* size_car) {
 }
 
 
-
-int compare_cars_by_year_speed(const void* a, const void* b) {
-	cars* car1 = (cars*)a;
-	cars* car2 = (cars*)b;
-
-	if (car1->year < car2->year) {
-		return -1;
-	}
-	else if (car1->year > car2->year) {
-		return 1;
-	}
-	else {
-		if (car1->speed < car2->speed) {
-			return -1;
-		}
-		else if (car1->speed > car2->speed) {
-			return 1;
-		}
-		else {
-			return 0;
-		}
-	}
-}
 
 sort_cars(cars arr[], int size_car)
 {
@@ -341,6 +302,8 @@ sort_cars(cars arr[], int size_car)
 	case 4: {
 		quick_sort_year_name(arr, 0, size_car - 1);
 	}
+	default:
+		printf("Неверно введённые данные\n");
 	}
 }
 
