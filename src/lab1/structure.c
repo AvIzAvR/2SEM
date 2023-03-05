@@ -276,19 +276,16 @@ void remove_struct(cars arr[], int* size_car)
 			break;
 		}
 	}
-
-	while (!scanf_s("%d", &index_to_remove) || index_to_remove < 0 || index_to_remove > *size_car)
+	while (!scanf_s("%d", &index_to_remove) || index_to_remove < 0 || index_to_remove >= *size_car)
 		{
 			rewind(stdin);
 			printf("Неверный тип данных!\n");
 		}
 	for (int i = index_to_remove; i < *size_car - 1; i++) 
 	{
-		{
 			arr[i] = arr[i + 1];
-		}
 	}
-	(*size_car)--;
+	*(size_car)--;
 	printf("Структура с индексом %d удалена.\n", index_to_remove);
 }
 
