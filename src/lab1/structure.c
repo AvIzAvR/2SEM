@@ -281,8 +281,12 @@ void remove_struct(cars arr[], int* size_car) {
 		return;
 	}
 
-	for (int i = index_to_remove - 1; i < *size_car - 1; i++) {
-		arr[i] = arr[i + 1];
+	for (int i = index_to_remove - 1; i < *size_car - 1; i++) 
+	{
+		if(i+1 < *size_car - 1) 
+		{
+			arr[i] = arr[i + 1];
+		}
 	}
 	(*size_car)--;
 	printf("Структура с индексом %d удалена.\n", index_to_remove);
