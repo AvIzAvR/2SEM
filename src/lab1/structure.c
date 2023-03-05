@@ -34,22 +34,22 @@ void show_struct(cars arr[], int size)
 {
 	for (int i = 0; i < size; i++)
 	{
-		printf("Название авто: %s        Скорость: %d        Год выпуска: %d        ", arr[i].name, arr[i].speed, arr[i].year);
+		printf("Название авто: %s        Скорость: %d        Год выпуска: %d        Цвет: ", arr[i].name, arr[i].speed, arr[i].year);
 		switch (arr[i].colors) {
 		case Red:
-			printf("Color: Red\n");
+			printf("Красный\n");
 			break;
 		case Green:
-			printf("Color: Green\n");
+			printf("Зелёный\n");
 			break;
 		case Black:
-			printf("Color: Black\n");
+			printf("Черный\n");
 			break;
 		case White:
-			printf("Color: White\n");
+			printf("Белый\n");
 			break;
 		default:
-			printf("Unknown color\n");
+			printf("Неверно введённый тип данных\n");
 			break;
 		}
 	}
@@ -127,17 +127,12 @@ int get_car(cars arr[])
 			else
 			{
 				arr[size_car].name = (char*)malloc((strlen(z) + 1) * sizeof(char));
-				if (arr[size_car].name == NULL)
-				{
-					printf("Ошибка выделения памяти\n");
-					exit(1);
-				}
 				strcpy_s(arr[size_car].name, strlen(z) + 1, z);
 				printf("\nВведите максимальную скорость автомобиля:");
 				get_int(&arr[size_car].speed);
 				printf("Введите год выпуска автомобиля:");
 				get_int(&arr[size_car].year);
-				printf("Введите цвет авто из предложенных:\n1 - Red\n2 - White\n3 - Black\n4 - Green");
+				printf("Введите цвет авто из предложенных:\n1 - Красный\n2 - Белый\n3 - Чёрный\n4 - Зелёный\n");
 				get_color(arr, size_car);
 				size_car++;
 				printf("\nВведите название авто, чтобы выйти введите \'s\':");
@@ -260,8 +255,26 @@ void remove_struct(cars arr[], int* size_car)
 {
 	int index_to_remove;
 	printf("Введите индекс структуры, которую нужно удалить:\n");
-	for (int i = 0; i < *size_car; ++i) {
-		printf("[%d]: Название авто: %s        Скорость: %d        Год выпуска: %d\n", (i + 1), arr[i].name, arr[i].speed, arr[i].year, arr[i].colors);
+	for (int i = 0; i < *size_car; ++i) 
+	{
+		printf("[%d]: Название авто: %s        Скорость: %d        Год выпуска: %d        Цвет: ", (i + 1), arr[i].name, arr[i].speed, arr[i].year);
+		switch (arr[i].colors) {
+		case Red:
+			printf("Красный\n");
+			break;
+		case Green:
+			printf("Зелёный\n");
+			break;
+		case Black:
+			printf("Черный\n");
+			break;
+		case White:
+			printf("Белый\n");
+			break;
+		default:
+			printf("Неверно введённый тип данных\n");
+			break;
+		}
 	}
 	scanf_s("%d", &index_to_remove);
 	if (index_to_remove < 1 || index_to_remove > *size_car) {
