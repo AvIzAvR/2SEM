@@ -99,20 +99,21 @@ int get_car(cars arr[])
 	int check = 0;
 	while (1)
 	{
-		int letter;
-		letter = getchar();
-		if (letter != '\n')
+		if (scanf_s("%c", &z[i], 1) != 1)
+		{
+			printf("Неверно введённый тип данных\n");
+			exit(1);
+		}
+		if (z[i] != '\n')
 		{
 			if (i < size_z)
 			{
-				z[i] = letter;
 				i++;
 			}
 			else
 			{
 				size_z++;
 				z = (char*)realloc(z, size_z * sizeof(char));
-				z[i] = letter;
 				i++;
 			}
 		}
@@ -125,8 +126,13 @@ int get_car(cars arr[])
 			}
 			else
 			{
-				arr[size_car].name = (char*)malloc((sizeof(z) + 1) * sizeof(char));
-				strcpy_s(arr[size_car].name, 256, z);
+				arr[size_car].name = (char*)malloc((strlen(z) + 1) * sizeof(char));
+				if (arr[size_car].name == NULL)
+				{
+					printf("Ошибка выделения памяти\n");
+					exit(1);
+				}
+				strcpy_s(arr[size_car].name, strlen(z) + 1, z);
 				printf("\nВведите максимальную скорость автомобиля:");
 				get_int(&arr[size_car].speed);
 				printf("Введите год выпуска автомобиля:");
