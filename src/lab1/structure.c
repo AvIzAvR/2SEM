@@ -173,18 +173,6 @@ void quick_sort_year(cars arr[], int low, int high)
 	}
 }
 
-
-
-void quick_sort_speed(cars arr[], int low, int high)
-{
-	if (low < high) {
-		int pi = quick_speed(arr, low, high);
-
-		quick_sort_speed(arr, low, pi - 1);
-		quick_sort_speed(arr, pi + 1, high);
-	}
-}
-
 int quick_speed(cars arr[], int low, int high)
 {
 	int pivot = arr[high].speed;
@@ -204,13 +192,13 @@ int quick_speed(cars arr[], int low, int high)
 	return (i + 1);
 }
 
-void quick_sort_name(cars arr[], int low, int high)
+void quick_sort_speed(cars arr[], int low, int high)
 {
 	if (low < high) {
-		int pi = quick_name(arr, low, high);
+		int pi = quick_speed(arr, low, high);
 
-		quick_sort_name(arr, low, pi - 1);
-		quick_sort_name(arr, pi + 1, high);
+		quick_sort_speed(arr, low, pi - 1);
+		quick_sort_speed(arr, pi + 1, high);
 	}
 }
 
@@ -233,9 +221,19 @@ int quick_name(cars arr[], int low, int high)
 	return (i + 1);
 }
 
+void quick_sort_name(cars arr[], int low, int high)
+{
+	if (low < high) {
+		int pi = quick_name(arr, low, high);
+
+		quick_sort_name(arr, low, pi - 1);
+		quick_sort_name(arr, pi + 1, high);
+	}
+}
 
 
-void quick_sort_year_name(cars arr[], int low, int high)
+
+void quick_sort_year_name(cars arr[], int high)
 {
 	quick_sort_year(arr, 0, high);
 	for (int i = high; i != 0; i--)
@@ -300,7 +298,7 @@ sort_cars(cars arr[], int size_car)
 		break;
 	}
 	case 4: {
-		quick_sort_year_name(arr, 0, size_car - 1);
+		quick_sort_year_name(arr, size_car - 1);
 	}
 	default:
 		printf("Неверно введённые данные\n");
