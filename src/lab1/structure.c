@@ -352,10 +352,9 @@ int menu(cars arr[], int size_car)
 		}
 		default: {
 			printf("Неверно введённый тип данных\n");
-			break;
+			return 0;
 		}
 		}
 	}
-	return 0;
 }
 
