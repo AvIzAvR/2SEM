@@ -250,11 +250,9 @@ void quick_sort_year_name(cars arr[], int high)
 }
 
 
-
 void remove_struct(cars arr[], int* size_car) 
 {
-	int index_to_remove;
-	printf("Введите индекс структуры, которую нужно удалить:\n");
+	int index_to_remove = 0;
 	for (int i = 0; i < *size_car; ++i) 
 	{
 		printf("[%d]: Название авто: %s        Скорость: %d        Год выпуска: %d        Цвет: ", i, arr[i].name, arr[i].speed, arr[i].year);
@@ -276,16 +274,17 @@ void remove_struct(cars arr[], int* size_car)
 			break;
 		}
 	}
+	printf("Введите индекс структуры, которую нужно удалить:\n");
 	while (!scanf_s("%d", &index_to_remove) || index_to_remove < 0 || index_to_remove >= *size_car)
-		{
-			rewind(stdin);
-			printf("Неверный тип данных!\n");
-		}
+	{
+		rewind(stdin);
+		printf("Неверный тип данных!\n");
+	}
 	for (int i = index_to_remove; i < *size_car - 1; i++) 
 	{
 			arr[i] = arr[i + 1];
 	}
-	*(size_car)--;
+	*size_car = *size_car - 1;
 	printf("Структура с индексом %d удалена.\n", index_to_remove);
 }
 
