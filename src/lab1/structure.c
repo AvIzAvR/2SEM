@@ -276,15 +276,16 @@ void remove_struct(cars arr[], int* size_car)
 			break;
 		}
 	}
-	scanf_s("%d", &index_to_remove);
-	if (index_to_remove < 1 || index_to_remove > *size_car) {
-		printf("Неверно введённый тип данных\n");
-		return;
-	}
+
+	while (!scanf_s("%d", &index_to_remove) || index_to_remove < 1 || index_to_remove > *size_car)
+		{
+			rewind(stdin);
+			printf("Неверный тип данных!\n");
+		}
 
 	for (int i = index_to_remove - 1; i < *size_car - 1; i++) 
 	{
-		if(i+1 < *size_car - 1) 
+		if(i+1 <= *size_car - 1) 
 		{
 			arr[i] = arr[i + 1];
 		}
@@ -324,8 +325,8 @@ void sort_cars(cars arr[], int size_car)
 	}
 }
 
-noreturn;
-void menu(cars arr[], int size_car)
+
+int menu(cars arr[], int size_car)
 {
 	int key;
 	while (1) {
@@ -355,5 +356,6 @@ void menu(cars arr[], int size_car)
 		}
 		}
 	}
+	return 0;
 }
 
