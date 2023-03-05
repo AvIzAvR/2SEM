@@ -17,25 +17,24 @@ void get_int(int* x)
 
 char* get_string()
 {
-	int num = 256;
-	char* string = (char*)calloc(num, sizeof(char));
-	char ch;
-	int pos = 0;
-	while (1)
-	{
-		ch = getchar();
-		if (ch == '\n')
-		{
-			string[pos] = '\0';
-			string = (char*)realloc(string, (pos + 1) * sizeof(char));
-			return string;
-		}
-
-		string[pos] = ch;
-		pos++;
-		if (pos == 256)
-			string = (char*)realloc(string, (pos + 1) * sizeof(char));
-	}
+    int num = 256;
+    char* string = (char*)calloc(num, sizeof(char));
+    char ch;
+    int pos = 0;
+    while (1)
+    {
+        ch = getchar();
+        if (ch == '\n')
+        {
+            string[pos] = '\0';
+            string = (char*)realloc(string, (pos + 1) * sizeof(char));
+            return string;
+        }
+        string[pos] = ch;
+        pos++;
+        if (pos == 256)
+            string = (char*)realloc(string, (pos + 1) * sizeof(char));
+    }
 }
 
 void get_st(int* st)
@@ -106,7 +105,6 @@ int get_car(cars arr[])
 			if (i < size_z)
 			{
 				z[i] = letter;
-				printf("%c", letter);
 				i++;
 			}
 			else
@@ -286,7 +284,7 @@ void remove_struct(cars arr[], int* size_car)
 		rewind(stdin);
 		printf("Неверный тип данных!\n");
 	}
-	for (int j = delete - 1; j < *size_car - 1; j++)
+	for (int j = delete - 1; j < *size_car - 1 && j >= 0; j++)
 	{
 		arr[j] = arr[j + 1];
 	}
