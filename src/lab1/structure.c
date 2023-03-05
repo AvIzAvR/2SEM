@@ -324,6 +324,7 @@ void sort_cars(cars arr[], int size_car)
 	}
 }
 
+noreturn;
 void menu(cars arr[], int size_car)
 {
 	int key;
