@@ -28,7 +28,7 @@ void quick_sort_speed(cars arr[], int low, int high);
 void quick_sort_year_name(cars arr[], int low, int high);
 void get_st(int* st);
 cars create_cars(int year, int speed, char* name);
-void menu(cars arr[], int size_car);
+int menu(cars arr[], int size_car);
 
 
 #endif
